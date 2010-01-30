@@ -30,7 +30,34 @@ require 'edgecase'
 # Your goal is to write the score method.
 
 def score(dice)
-  # You need to write this method
+  score = 0
+  
+  (1..6).each do |face|
+    count = dice.select {|n| n == face}.size
+    while count > 0
+      if count >= 3
+        score += (face == 1) ? 1000 : face * 100
+        count -= 3
+      elsif face == 5
+        score += count * 50
+        count = 0
+      elsif face == 1
+        score += count * 100
+        count = 0
+      else
+        count = 0
+      end
+    end
+  end
+#  dice.each do |dice|
+#    if (dice == 5)
+#      score += dice * 10
+#    elsif (dice == 1)
+#      score += 100
+#    end
+#  end
+  
+  score
 end
 
 class AboutScoringAssignment < EdgeCase::Koan
